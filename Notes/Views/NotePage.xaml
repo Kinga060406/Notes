@@ -7,11 +7,15 @@
     <ContentPage.BindingContext>
         <viewModels:NoteViewModel />
     </ContentPage.BindingContext>
+    
     <VerticalStackLayout Spacing="10" Margin="5">
+        <Label Text=" " HeightRequest="10"/>
+        <Label FontSize="25" FontAttributes="Bold" Text="Name Group" VerticalOptions="End" />
+        <Label Text=" " HeightRequest="10"/>
         <Editor x:Name="TextEditor"
                 Placeholder="Enter your note"
                 Text="{Binding Text}"
-                HeightRequest="100" />
+                HeightRequest="10" />
 
         <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
             <Button Text="Save"
@@ -21,6 +25,52 @@
                     Text="Delete"
                     Command="{Binding DeleteCommand}"/>
 
+        </Grid>
+
+        <Label Text=" " HeightRequest="20"/>
+        <Label FontSize="25" FontAttributes="Bold" Text="Member" VerticalOptions="End" />
+
+        <Grid
+      RowDefinitions="0, Auto, *"
+      ColumnDefinitions=".75*,.25*"
+      Padding="10"
+      RowSpacing="10"
+      ColumnSpacing="10">
+
+            <Entry Placeholder="Enter member"
+           Grid.Row="1"/>
+
+            <Button Text="Add"
+            Grid.Row="1"
+            Grid.Column="1"/>
+
+            <CollectionView Grid.Row="2" Grid.ColumnSpan="2">
+                <CollectionView.ItemsSource>
+                    <x:Array Type ="{x:Type x:String} ">
+                        <x:String>Kinga</x:String>
+                        <x:String>Mateusz</x:String>
+                        <x:String>Krystian</x:String>
+                    </x:Array>
+                </CollectionView.ItemsSource>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Delete"
+                                       BackgroundColor="Red"/>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Grid Padding="0,5">
+                                <Frame>
+                                    <Label Text="{Binding .}"
+                               FontSize="24"/>
+                                </Frame>
+                            </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </Grid>
     </VerticalStackLayout>
 </ContentPage>
