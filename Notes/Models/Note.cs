@@ -4,12 +4,11 @@ internal class Note
 {
     public string Filename { get; set; }
     public string Text { get; set; }
-    public DateTime Date { get; set; }
+    
 
     public Note()
     {
-        Filename = $"{Path.GetRandomFileName()}.notes.txt";
-        Date = DateTime.Now;
+        Filename = $"{Path.GetRandomFileName()}.notes.txt"; 
         Text = "";
     }
 
@@ -31,7 +30,6 @@ internal class Note
             {
                 Filename = Path.GetFileName(filename),
                 Text = File.ReadAllText(filename),
-                Date = File.GetLastWriteTime(filename)
             };
     }
 
@@ -47,9 +45,6 @@ internal class Note
                 .EnumerateFiles(appDataPath, "*.notes.txt")
 
                 // Each file name is used to load a note
-                .Select(filename => Note.Load(Path.GetFileName(filename)))
-
-                // With the final collection of notes, order them by date
-                .OrderByDescending(note => note.Date);
+                .Select(filename => Note.Load(Path.GetFileName(filename)));
     }
 }

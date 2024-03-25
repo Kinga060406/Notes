@@ -21,7 +21,7 @@ internal class NoteViewModel : ObservableObject, IQueryAttributable
         }
     }
 
-    public DateTime Date => _note.Date;
+    
 
     public string Identifier => _note.Filename;
 
@@ -44,7 +44,7 @@ internal class NoteViewModel : ObservableObject, IQueryAttributable
 
     private async Task Save()
     {
-        _note.Date = DateTime.Now;
+        
         _note.Save();
         await Shell.Current.GoToAsync($"..?saved={_note.Filename}");
     }
@@ -73,6 +73,6 @@ internal class NoteViewModel : ObservableObject, IQueryAttributable
     private void RefreshProperties()
     {
         OnPropertyChanged(nameof(Text));
-        OnPropertyChanged(nameof(Date));
+        
     }
 }
